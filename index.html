@@ -62,9 +62,9 @@
 
 	<div class="wrap">
 		<div class="stats">
-			<div class="stat-card"><span class="num" data-target="24" data-suffix="/7">0/7</span><span class="label">Testing availability</span></div>
+			<div class="stat-card"><span class="num" data-target="15" data-suffix="">0</span><span class="label">Years in business</span></div>
 			<div class="stat-card"><span class="num" data-target="25" data-suffix="%">0%</span><span class="label">of workplace accidents involve portable appliances<sup>&dagger;</sup></span></div>
-			<div class="stat-card"><span class="num" data-target="6" data-suffix="">0</span><span class="label">Regions covered: Dundee, Perth and Kinross, Fife, Angus, Edinburgh and Glasgow</span></div>
+			<div class="stat-card"><span class="num" data-target="10000" data-suffix="+">0+</span><span class="label">Appliances tested</span></div>
 			<div class="stat-card"><span class="num" data-target="100" data-suffix="%">0%</span><span class="label">City &amp; Guilds qualified engineers</span></div>
 		</div>
 	</div>
@@ -314,11 +314,11 @@
 				var progress = Math.min((timestamp - start) / duration, 1);
 				var eased = 1 - Math.pow(1 - progress, 5);
 				var current = Math.round(eased * target);
-				el.textContent = current + suffix;
+				el.textContent = current.toLocaleString() + suffix;
 				if (progress < 1) {
 					requestAnimationFrame(step);
 				} else {
-					el.textContent = target + suffix;
+					el.textContent = target.toLocaleString() + suffix;
 				}
 			}
 			requestAnimationFrame(step);
