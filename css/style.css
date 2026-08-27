@@ -88,16 +88,20 @@ h3 { font-size: 1.15rem; color: var(--green-dark); }
 	font-weight: 700;
 	text-decoration: none;
 	box-shadow: var(--shadow);
-	transition: transform 0.15s ease, background 0.15s ease;
+	border: 2px solid transparent;
+	transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
 .btn:hover { background: var(--green-dark); transform: translateY(-2px); }
+.btn:hover, .btn:focus-visible { border-color: #fff; }
+.btn:focus-visible { outline: 3px solid rgba(255,255,255,0.6); outline-offset: 2px; }
 .btn.secondary {
 	background: transparent;
 	color: #fff;
 	border: 2px solid rgba(255,255,255,0.6);
 	box-shadow: none;
 }
-.btn.secondary:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
+.btn.secondary:hover { background: rgba(255,255,255,0.16); border-color: #fff; }
+.btn.secondary:focus-visible { outline: 3px solid rgba(255,255,255,0.6); outline-offset: 2px; border-color: #fff; }
 .btn.on-light {
 	background: transparent;
 	color: var(--green-dark);
@@ -105,6 +109,7 @@ h3 { font-size: 1.15rem; color: var(--green-dark); }
 	box-shadow: none;
 }
 .btn.on-light:hover { background: var(--green); color: #fff; }
+.btn.on-light:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
 
 /* ------------------------------------------------------------------ */
 /* Header / nav                                                        */
@@ -113,9 +118,8 @@ h3 { font-size: 1.15rem; color: var(--green-dark); }
 	position: sticky;
 	top: 0;
 	z-index: 100;
-	background: rgba(255,255,255,0.94);
-	backdrop-filter: blur(6px);
-	border-bottom: 1px solid var(--line);
+	background: #fff;
+	box-shadow: 0 1px 0 var(--line);
 }
 .header-row {
 	display: flex;
@@ -157,6 +161,17 @@ nav.main-nav a:hover { color: var(--green-dark); }
 	text-decoration: none;
 	color: var(--green-dark);
 	white-space: nowrap;
+	border: 2px solid transparent;
+	border-radius: 999px;
+	padding: 8px 14px;
+	transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.phone-link:hover,
+.phone-link:focus-visible {
+	background: var(--green);
+	border-color: var(--green-dark);
+	color: #fff;
+	outline: none;
 }
 .phone-link svg { flex: none; }
 
@@ -191,11 +206,12 @@ nav.main-nav a:hover { color: var(--green-dark); }
 	content: "";
 	position: absolute;
 	inset: 0;
+	pointer-events: none;
 	background: url('../images/dundee.jpg') center/cover no-repeat;
 	opacity: 0.18;
 	mix-blend-mode: luminosity;
 }
-.hero .wrap { position: relative; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
+.hero .wrap { position: relative; max-width: 760px; }
 .hero h1 {
 	font-size: clamp(2rem, 4.2vw, 3.1rem);
 	margin-bottom: 18px;
@@ -203,25 +219,20 @@ nav.main-nav a:hover { color: var(--green-dark); }
 .hero p.lede { color: rgba(255,255,255,0.92); max-width: 560px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
 
-.hero-badges {
-	background: rgba(255,255,255,0.1);
-	border: 1px solid rgba(255,255,255,0.25);
-	border-radius: var(--radius);
-	padding: 24px;
-	display: flex;
-	flex-direction: column;
-	gap: 18px;
-}
-.hero-badges .badge-row {
+.eyebrow-row {
 	display: flex;
 	align-items: center;
-	gap: 14px;
-	background: #fff;
-	border-radius: 10px;
-	padding: 10px 14px;
+	gap: 10px;
+	margin-bottom: 14px;
 }
-.hero-badges .badge-row img { height: 44px; width: auto; }
-.hero-badges .badge-row span { color: var(--ink); font-weight: 700; font-size: 0.9rem; }
+.cert-mini {
+	height: 34px;
+	width: auto;
+	background: #fff;
+	border-radius: 8px;
+	padding: 3px 6px;
+	box-shadow: var(--shadow);
+}
 
 /* ------------------------------------------------------------------ */
 /* Stats strip                                                         */
@@ -421,7 +432,6 @@ footer a:hover { color: #fff; }
 /* Responsive                                                           */
 /* ------------------------------------------------------------------ */
 @media (max-width: 960px) {
-	.hero .wrap { grid-template-columns: 1fr; }
 	.stats { grid-template-columns: repeat(2, 1fr); margin-top: 32px; }
 	.grid-3 { grid-template-columns: repeat(2, 1fr); }
 	.split { grid-template-columns: 1fr; gap: 28px; }
@@ -430,31 +440,72 @@ footer a:hover { color: #fff; }
 }
 
 @media (max-width: 720px) {
+	.site-header {
+		background: #fff;
+		box-shadow: none;
+	}
 	nav.main-nav {
 		position: absolute;
 		top: 100%;
 		left: 0;
 		right: 0;
-		background: #fff;
+		background: linear-gradient(160deg, var(--green-dark), var(--ink) 85%);
 		flex-direction: column;
-		align-items: flex-start;
-		padding: 20px 24px 28px;
-		gap: 16px;
-		border-bottom: 1px solid var(--line);
-		box-shadow: var(--shadow);
-		transform: translateY(-130%);
-		transition: transform 0.2s ease;
+		align-items: stretch;
+		padding: 10px;
+		gap: 4px;
+		border-radius: 0 0 var(--radius) var(--radius);
+		box-shadow: 0 16px 32px rgba(0,0,0,0.25);
+		transform: translateY(-16px);
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition: transform 0.22s ease, opacity 0.22s ease, visibility 0.22s;
 	}
-	nav.main-nav.open { transform: translateY(0); }
+	nav.main-nav.open {
+		transform: translateY(0);
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+	nav.main-nav a {
+		color: #fff;
+		padding: 14px 16px;
+		border-radius: 10px;
+		font-size: 1rem;
+	}
+	nav.main-nav a:hover,
+	nav.main-nav a:focus-visible { background: rgba(255,255,255,0.14); color: #fff; }
 	.nav-toggle { display: block; }
 	.header-cta { gap: 10px; }
 	.header-cta .phone-link span.phone-text { display: none; }
 	.header-row { height: auto; padding: 12px 0; }
 	.brand img { height: 43px; }
 	section { padding: 56px 0; }
-	.grid-3, .reviews-grid, .contact-grid { grid-template-columns: 1fr; }
+	.grid-3, .contact-grid { grid-template-columns: 1fr; }
 	.stats { grid-template-columns: 1fr 1fr; }
 	.cert-strip { gap: 26px; }
 	.hero { padding: 56px 0 80px; }
 	.hero-actions .btn { width: 100%; justify-content: center; }
+
+	/* Hide the "Peace of mind" card on mobile only */
+	.mobile-hide { display: none; }
+
+	/* Reviews: horizontal scroll-snap carousel on mobile only */
+	.reviews-grid {
+		display: flex;
+		grid-template-columns: none;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		gap: 16px;
+		margin: 40px -24px 0;
+		padding: 4px 24px 12px;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+	}
+	.reviews-grid::-webkit-scrollbar { display: none; }
+	.review-card {
+		flex: 0 0 82%;
+		scroll-snap-align: start;
+	}
 }

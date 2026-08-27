@@ -40,18 +40,15 @@
 	<section class="hero">
 		<div class="wrap">
 			<div>
-				<div class="eyebrow" style="color:#d7f0dc;">City &amp; Guilds Qualified</div>
+				<div class="eyebrow-row">
+					<img class="cert-mini" src="images/certified.png" alt="Certified PAT Tester">
+					<div class="eyebrow" style="color:#d7f0dc; margin-bottom:0;">City &amp; Guilds Qualified</div>
+				</div>
 				<h1>PAT Testing across Dundee, Perth, Fife &amp; Angus</h1>
 				<p class="lede">Safetay Electrical Testing keeps your workplace safe and compliant with fast, thorough Portable Appliance Testing &mdash; available 24 hours a day, 7 days a week, at a time that suits your business.</p>
 				<div class="hero-actions">
 					<a class="btn" href="tel:+447775435872">Call 07775 435 872</a>
-					<a class="btn secondary" href="#contact">Get a Quote</a>
-				</div>
-			</div>
-			<div class="hero-badges">
-				<div class="badge-row">
-					<img src="images/certified.png" alt="Certified PAT Tester badge">
-					<span>Certified PAT Tester</span>
+					<a class="btn secondary" href="get-a-quote.html">Get a Quote</a>
 				</div>
 			</div>
 		</div>
@@ -59,10 +56,10 @@
 
 	<div class="wrap">
 		<div class="stats">
-			<div class="stat-card"><span class="num">24/7</span><span class="label">Testing availability</span></div>
-			<div class="stat-card"><span class="num">25%</span><span class="label">of workplace accidents involve portable appliances<sup>&dagger;</sup></span></div>
-			<div class="stat-card"><span class="num">4</span><span class="label">Regions covered: Dundee, Perth, Fife &amp; Angus</span></div>
-			<div class="stat-card"><span class="num">100%</span><span class="label">City &amp; Guilds qualified engineers</span></div>
+			<div class="stat-card"><span class="num" data-target="24" data-suffix="/7">0/7</span><span class="label">Testing availability</span></div>
+			<div class="stat-card"><span class="num" data-target="25" data-suffix="%">0%</span><span class="label">of workplace accidents involve portable appliances<sup>&dagger;</sup></span></div>
+			<div class="stat-card"><span class="num" data-target="4" data-suffix="">0</span><span class="label">Regions covered: Dundee, Perth, Fife &amp; Angus</span></div>
+			<div class="stat-card"><span class="num" data-target="100" data-suffix="%">0%</span><span class="label">City &amp; Guilds qualified engineers</span></div>
 		</div>
 	</div>
 
@@ -109,7 +106,7 @@
 					<h3>Legal compliance</h3>
 					<p>Stay on the right side of the Electricity At Work Regulations and Health &amp; Safety at Work Act.</p>
 				</div>
-				<div class="card">
+				<div class="card mobile-hide">
 					<div class="icon">
 						<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
 					</div>
@@ -294,6 +291,47 @@
 			toggle.setAttribute('aria-expanded', false);
 		});
 	});
+
+	// Count-up animation for the stats strip, once visible on screen.
+	(function () {
+		var nums = document.querySelectorAll('.stat-card .num[data-target]');
+		if (!nums.length) return;
+
+		function animate(el) {
+			var target = parseInt(el.getAttribute('data-target'), 10);
+			var suffix = el.getAttribute('data-suffix') || '';
+			var duration = 1200;
+			var start = null;
+
+			function step(timestamp) {
+				if (!start) start = timestamp;
+				var progress = Math.min((timestamp - start) / duration, 1);
+				var eased = 1 - Math.pow(1 - progress, 3);
+				var current = Math.round(eased * target);
+				el.textContent = current + suffix;
+				if (progress < 1) {
+					requestAnimationFrame(step);
+				} else {
+					el.textContent = target + suffix;
+				}
+			}
+			requestAnimationFrame(step);
+		}
+
+		if ('IntersectionObserver' in window) {
+			var observer = new IntersectionObserver(function (entries) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						animate(entry.target);
+						observer.unobserve(entry.target);
+					}
+				});
+			}, { threshold: 0.4 });
+			nums.forEach(function (el) { observer.observe(el); });
+		} else {
+			nums.forEach(animate);
+		}
+	})();
 </script>
 
 </body>
