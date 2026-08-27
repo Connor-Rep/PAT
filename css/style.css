@@ -431,8 +431,8 @@ footer a:hover { color: #fff; }
 
 @media (max-width: 720px) {
 	nav.main-nav {
-		position: fixed;
-		top: 76px;
+		position: absolute;
+		top: 100%;
 		left: 0;
 		right: 0;
 		background: #fff;
@@ -447,7 +447,10 @@ footer a:hover { color: #fff; }
 	}
 	nav.main-nav.open { transform: translateY(0); }
 	.nav-toggle { display: block; }
+	.header-cta { gap: 10px; }
 	.header-cta .phone-link span.phone-text { display: none; }
+	.header-row { height: auto; padding: 12px 0; }
+	.brand img { height: 43px; }
 	section { padding: 56px 0; }
 	.grid-3, .reviews-grid, .contact-grid { grid-template-columns: 1fr; }
 	.stats { grid-template-columns: 1fr 1fr; }
