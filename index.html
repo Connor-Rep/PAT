@@ -173,6 +173,13 @@
 		</div>
 	</section>
 
+	<!-- BRAND STATEMENT / SCROLL REVEAL -->
+	<section class="brand-reveal alt">
+		<div class="wrap">
+			<p class="reveal-text">One overlooked plug. One frayed lead. One spark is all it takes &mdash; that's why we test every appliance, every time, so your business stays switched on.</p>
+		</div>
+	</section>
+
 	<!-- REVIEWS -->
 	<section id="reviews" class="alt">
 		<div class="wrap">
@@ -300,13 +307,13 @@
 		function animate(el) {
 			var target = parseInt(el.getAttribute('data-target'), 10);
 			var suffix = el.getAttribute('data-suffix') || '';
-			var duration = 1200;
+			var duration = 2400;
 			var start = null;
 
 			function step(timestamp) {
 				if (!start) start = timestamp;
 				var progress = Math.min((timestamp - start) / duration, 1);
-				var eased = 1 - Math.pow(1 - progress, 3);
+				var eased = 1 - Math.pow(1 - progress, 5);
 				var current = Math.round(eased * target);
 				el.textContent = current + suffix;
 				if (progress < 1) {
@@ -331,6 +338,45 @@
 		} else {
 			nums.forEach(animate);
 		}
+	})();
+
+	// Scroll-linked word reveal for the brand statement.
+	(function () {
+		var paras = document.querySelectorAll('.reveal-text');
+		if (!paras.length) return;
+		var accentWords = ['spark', 'test', 'switched'];
+
+		paras.forEach(function (p) {
+			var text = p.textContent.trim();
+			p.innerHTML = text.split(' ').map(function (word) {
+				var clean = word.toLowerCase().replace(/[^a-z]/g, '');
+				var cls = accentWords.indexOf(clean) !== -1 ? 'rw rw-accent' : 'rw';
+				return '<span class="' + cls + '">' + word + '</span>';
+			}).join(' ');
+		});
+
+		var words = document.querySelectorAll('.reveal-text .rw');
+		var ticking = false;
+
+		function update() {
+			var vh = window.innerHeight;
+			words.forEach(function (el) {
+				var rect = el.getBoundingClientRect();
+				var center = rect.top + rect.height / 2;
+				var start = vh * 0.88;
+				var end = vh * 0.38;
+				var t = (start - center) / (start - end);
+				t = Math.max(0, Math.min(1, t));
+				el.style.opacity = (0.15 + t * 0.85).toFixed(2);
+			});
+			ticking = false;
+		}
+
+		window.addEventListener('scroll', function () {
+			if (!ticking) { requestAnimationFrame(update); ticking = true; }
+		}, { passive: true });
+		window.addEventListener('resize', update);
+		update();
 	})();
 </script>
 
