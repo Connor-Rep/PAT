@@ -328,7 +328,7 @@ nav.main-nav a:hover { color: var(--green-dark); }
 	gap: 48px;
 }
 .cert-strip img { max-height: 68px; width: auto; }
-.cert-strip img.cert-disclosure { max-height: 75px; }
+.cert-strip img.cert-disclosure { max-height: 83px; }
 
 /* ------------------------------------------------------------------ */
 /* Reviews                                                             */
