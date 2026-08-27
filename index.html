@@ -179,18 +179,6 @@
 		</div>
 	</section>
 
-	<!-- BRAND STATEMENT / SCROLL REVEAL -->
-	<section class="brand-reveal alt">
-		<div class="wrap">
-			<div class="spark-lines">
-				<div class="spark-line"><span class="wire"></span><span class="line-text">One overlooked plug. One frayed lead.</span></div>
-				<div class="spark-line"><span class="wire"></span><span class="line-text">One <strong class="accent">spark</strong> is all it takes &mdash;</span></div>
-				<div class="spark-line"><span class="wire"></span><span class="line-text">that's why we <strong class="accent">test</strong> every appliance, every time,</span></div>
-				<div class="spark-line"><span class="wire"></span><span class="line-text">so your business stays <strong class="accent">switched on</strong>.</span></div>
-			</div>
-		</div>
-	</section>
-
 	<!-- REVIEWS -->
 	<section id="reviews" class="alt">
 		<div class="wrap">
@@ -348,31 +336,6 @@
 			nums.forEach(function (el) { observer.observe(el); });
 		} else {
 			nums.forEach(animate);
-		}
-	})();
-
-	// Brand statement reveal: each line "energises" once, in sequence, the
-	// first time it scrolls into view (not continuously tied to scroll).
-	(function () {
-		var lines = document.querySelectorAll('.spark-line');
-		if (!lines.length) return;
-
-		lines.forEach(function (line, i) {
-			line.style.setProperty('--d', (i * 0.18) + 's');
-		});
-
-		if ('IntersectionObserver' in window) {
-			var observer = new IntersectionObserver(function (entries) {
-				entries.forEach(function (entry) {
-					if (entry.isIntersecting) {
-						entry.target.classList.add('visible');
-						observer.unobserve(entry.target);
-					}
-				});
-			}, { threshold: 0.5 });
-			lines.forEach(function (line) { observer.observe(line); });
-		} else {
-			lines.forEach(function (line) { line.classList.add('visible'); });
 		}
 	})();
 </script>
