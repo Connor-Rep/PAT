@@ -47,8 +47,14 @@
 				<h1>PAT Testing across Dundee, Perth, Fife &amp; Angus</h1>
 				<p class="lede">Safetay Electrical Testing keeps your workplace safe and compliant with fast, thorough Portable Appliance Testing &mdash; available 24 hours a day, 7 days a week, at a time that suits your business.</p>
 				<div class="hero-actions">
-					<a class="btn" href="tel:+447775435872">Call 07775 435 872</a>
-					<a class="btn secondary" href="get-a-quote.html">Get a Quote</a>
+					<a class="btn" href="tel:+447775435872">
+						<span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+						Call 07775 435 872
+					</a>
+					<a class="btn secondary" href="get-a-quote.html">
+						<span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+						Get a Quote
+					</a>
 				</div>
 			</div>
 		</div>
@@ -176,7 +182,12 @@
 	<!-- BRAND STATEMENT / SCROLL REVEAL -->
 	<section class="brand-reveal alt">
 		<div class="wrap">
-			<p class="reveal-text">One overlooked plug. One frayed lead. One spark is all it takes &mdash; that's why we test every appliance, every time, so your business stays switched on.</p>
+			<div class="spark-lines">
+				<div class="spark-line"><span class="wire"></span><span class="line-text">One overlooked plug. One frayed lead.</span></div>
+				<div class="spark-line"><span class="wire"></span><span class="line-text">One <strong class="accent">spark</strong> is all it takes &mdash;</span></div>
+				<div class="spark-line"><span class="wire"></span><span class="line-text">that's why we <strong class="accent">test</strong> every appliance, every time,</span></div>
+				<div class="spark-line"><span class="wire"></span><span class="line-text">so your business stays <strong class="accent">switched on</strong>.</span></div>
+			</div>
 		</div>
 	</section>
 
@@ -340,43 +351,29 @@
 		}
 	})();
 
-	// Scroll-linked word reveal for the brand statement.
+	// Brand statement reveal: each line "energises" once, in sequence, the
+	// first time it scrolls into view (not continuously tied to scroll).
 	(function () {
-		var paras = document.querySelectorAll('.reveal-text');
-		if (!paras.length) return;
-		var accentWords = ['spark', 'test', 'switched'];
+		var lines = document.querySelectorAll('.spark-line');
+		if (!lines.length) return;
 
-		paras.forEach(function (p) {
-			var text = p.textContent.trim();
-			p.innerHTML = text.split(' ').map(function (word) {
-				var clean = word.toLowerCase().replace(/[^a-z]/g, '');
-				var cls = accentWords.indexOf(clean) !== -1 ? 'rw rw-accent' : 'rw';
-				return '<span class="' + cls + '">' + word + '</span>';
-			}).join(' ');
+		lines.forEach(function (line, i) {
+			line.style.setProperty('--d', (i * 0.18) + 's');
 		});
 
-		var words = document.querySelectorAll('.reveal-text .rw');
-		var ticking = false;
-
-		function update() {
-			var vh = window.innerHeight;
-			words.forEach(function (el) {
-				var rect = el.getBoundingClientRect();
-				var center = rect.top + rect.height / 2;
-				var start = vh * 0.88;
-				var end = vh * 0.38;
-				var t = (start - center) / (start - end);
-				t = Math.max(0, Math.min(1, t));
-				el.style.opacity = (0.15 + t * 0.85).toFixed(2);
-			});
-			ticking = false;
+		if ('IntersectionObserver' in window) {
+			var observer = new IntersectionObserver(function (entries) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('visible');
+						observer.unobserve(entry.target);
+					}
+				});
+			}, { threshold: 0.5 });
+			lines.forEach(function (line) { observer.observe(line); });
+		} else {
+			lines.forEach(function (line) { line.classList.add('visible'); });
 		}
-
-		window.addEventListener('scroll', function () {
-			if (!ticking) { requestAnimationFrame(update); ticking = true; }
-		}, { passive: true });
-		window.addEventListener('resize', update);
-		update();
 	})();
 </script>
 
