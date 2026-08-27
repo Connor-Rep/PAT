@@ -121,7 +121,6 @@ h3 { font-size: 1.15rem; color: var(--green-dark); }
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 24px;
 	height: 76px;
 }
 .brand {
@@ -129,12 +128,8 @@ h3 { font-size: 1.15rem; color: var(--green-dark); }
 	align-items: center;
 	gap: 12px;
 	text-decoration: none;
-	background: var(--ink);
-	padding: 8px 14px;
-	border-radius: 10px;
-	flex: none;
 }
-.brand img { height: 28px; width: auto; }
+.brand img { height: 48px; width: auto; }
 
 nav.main-nav {
 	display: flex;
@@ -163,7 +158,7 @@ nav.main-nav a:hover { color: var(--green-dark); }
 	color: var(--green-dark);
 	white-space: nowrap;
 }
-.phone-link svg { flex: none; width: 26px; height: 26px; }
+.phone-link svg { flex: none; }
 
 .nav-toggle {
 	display: none;
