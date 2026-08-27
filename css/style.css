@@ -194,7 +194,8 @@ nav.main-nav a:hover { color: var(--green-dark); }
 	gap: 8px;
 	font-weight: 700;
 	text-decoration: none;
-	color: var(--green-dark);
+	color: #fff;
+	background: var(--green);
 	white-space: nowrap;
 	border: 2px solid transparent;
 	border-radius: 4px 16px 4px 16px;
@@ -203,9 +204,9 @@ nav.main-nav a:hover { color: var(--green-dark); }
 }
 .phone-link:hover,
 .phone-link:focus-visible {
-	background: var(--green);
+	background: transparent;
 	border-color: var(--green-dark);
-	color: #fff;
+	color: var(--green-dark);
 	outline: none;
 }
 .phone-link svg { flex: none; }
