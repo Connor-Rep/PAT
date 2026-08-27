@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TODO: update every <loc> URL below to the real domain once the site
+     moves off https://connor-rep.github.io/PAT/ to its own repo. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<url>
+		<loc>https://connor-rep.github.io/PAT/</loc>
+	</url>
+	<url>
+		<loc>https://connor-rep.github.io/PAT/get-a-quote.html</loc>
+	</url>
+</urlset>
