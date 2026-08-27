@@ -639,7 +639,7 @@ footer a:hover { color: #fff; }
 		font-size: 0.92rem;
 	}
 	nav.main-nav a:hover,
-	nav.main-nav a:focus-visible { background: rgba(255,255,255,0.14); color: #fff; }
+	nav.main-nav a:focus-visible { background: var(--green); color: #fff; }
 	.nav-toggle { display: block; }
 }
 
@@ -688,7 +688,7 @@ footer a:hover { color: #fff; }
 		font-size: 0.88rem;
 	}
 	nav.main-nav a:hover,
-	nav.main-nav a:focus-visible { background: rgba(255,255,255,0.14); color: #fff; }
+	nav.main-nav a:focus-visible { background: var(--green); color: #fff; }
 	.nav-toggle { display: block; }
 	.header-cta { gap: 6px; }
 	.header-cta .phone-link span.phone-text { display: none; }
