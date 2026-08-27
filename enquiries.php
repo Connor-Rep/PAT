@@ -16,7 +16,7 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <div id="banner">
-<div id="logo"><a href="index.php"><img src="images/logo.png"></a></div>
+<div id="logo"><a href="index.html"><img src="images/logo.png"></a></div>
 <div id="contacts">
 
 
@@ -25,7 +25,7 @@ Telephone:  Mob:07775 435 872 <br>
 email: info@safetayelectricaltesting.co.uk  
  </div>
 </div><div id="content">
-<div id="menu"><a href="index.php" class="homer">Home</a>
+<div id="menu"><a href="index.html" class="homer">Home</a>
 <a href="about-pat-testing.html">Regulations &amp; Information</a>
 <a href="about-testing.html">About PAT Testing</a>
 <a href="customer-reviews.html">customer reviews</a>
