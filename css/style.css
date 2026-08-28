@@ -557,6 +557,20 @@ nav.main-nav a:hover { color: var(--green-dark); }
 	border-color: var(--green);
 	background: #fff;
 }
+
+.quote-form[hidden] { display: none; }
+.quote-success-icon {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background: var(--green);
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.quote-success h3 { margin: 0; }
+.quote-success p { margin: 0; color: var(--ink-soft); }
 .quote-form textarea { resize: vertical; }
 .quote-form .btn {
 	align-self: flex-start;
