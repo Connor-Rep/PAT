@@ -117,31 +117,6 @@ h3 { font-size: 1.15rem; color: var(--green-dark); }
 .btn.secondary:hover { background: rgba(255,255,255,0.2); border-color: #fff; }
 .btn.secondary:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 
-/* Glowing dot that continuously travels the button's own outline. */
-@property --glow-angle {
-	syntax: '<angle>';
-	inherits: false;
-	initial-value: 0deg;
-}
-.btn-glow {
-	position: relative;
-}
-.btn-glow::before {
-	content: "";
-	position: absolute;
-	inset: -3px;
-	border-radius: inherit;
-	padding: 2px;
-	background: conic-gradient(from var(--glow-angle), transparent 0 88%, #fff8dc 94%, #ffe08a 97%, transparent 100%);
-	-webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-	-webkit-mask-composite: xor;
-	mask-composite: exclude;
-	animation: glow-spin 4.5s linear infinite;
-	pointer-events: none;
-}
-@keyframes glow-spin {
-	to { --glow-angle: 360deg; }
-}
 .btn.on-light {
 	background: transparent;
 	color: var(--green-dark);
@@ -260,15 +235,11 @@ nav.main-nav a:hover { color: var(--green-dark); }
 .hero p.lede { color: rgba(255,255,255,0.92); max-width: 560px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
 
-.eyebrow-row {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	margin-bottom: 14px;
-}
 .cert-mini {
+	display: block;
 	height: 26px;
 	width: auto;
+	margin-bottom: 14px;
 }
 
 /* ------------------------------------------------------------------ */
