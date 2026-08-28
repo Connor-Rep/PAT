@@ -67,6 +67,7 @@
 	<!-- QUOTE FORM -->
 	<section class="alt">
 		<div class="wrap quote-layout">
+			<div class="quote-swap" id="quoteSwap">
 			<form class="quote-form" id="quoteForm" action="https://formspree.io/f/maeyyaga" method="POST">
 				<input type="hidden" name="_subject" value="PAT testing quote request">
 				<div class="form-row">
@@ -113,6 +114,7 @@
 				<h3>Thanks, we've got your enquiry</h3>
 				<p>We'll get back to you with a quote, usually within a day. If it's urgent, give us a call &mdash; <span class="detail-loc-side">details on the right</span><span class="detail-loc-below">details below</span>.</p>
 			</div>
+			</div>
 
 			<aside class="quote-aside">
 				<h3>Prefer to talk it through?</h3>
@@ -144,6 +146,21 @@
 </footer>
 
 <script>
+	// Fade the page out before following an internal link to another page,
+	// so navigating the site doesn't feel like an abrupt jump cut.
+	document.addEventListener('click', function (e) {
+		if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+		var link = e.target.closest('a');
+		if (!link || !link.href || link.target === '_blank') return;
+		var url;
+		try { url = new URL(link.href); } catch (err) { return; }
+		if (url.origin !== window.location.origin) return;
+		if (url.pathname === window.location.pathname && url.hash) return;
+		e.preventDefault();
+		document.body.classList.add('page-fade-out');
+		setTimeout(function () { window.location.href = link.href; }, 200);
+	});
+
 	document.getElementById('year').textContent = new Date().getFullYear();
 	var toggle = document.getElementById('nav-toggle');
 	var nav = document.getElementById('main-nav');
@@ -158,21 +175,36 @@
 		});
 	});
 
+	var quoteSwap = document.getElementById('quoteSwap');
 	var quoteForm = document.getElementById('quoteForm');
 	var quoteSuccess = document.getElementById('quoteSuccess');
 	var formStatus = document.getElementById('formStatus');
 	var MIN_SEND_DELAY = 700; // keep the "Sending..." state visible for a moment, even on a fast connection
 	var FADE_DURATION = 250; // matches the CSS transition on .quote-form / .quote-success
+	var RESIZE_DURATION = 300; // matches .quote-swap.is-resizing's CSS transition
 
 	function showSuccess() {
+		// Pin the wrapper to its current pixel height first (no visual change,
+		// but a "px -> px" transition can animate where "auto -> px" can't),
+		// so the swap to the shorter success card resizes smoothly instead of
+		// the page snapping/jumping straight to the new layout.
+		quoteSwap.style.height = quoteSwap.offsetHeight + 'px';
+		quoteSwap.offsetHeight; // force reflow
+		quoteSwap.classList.add('is-resizing');
+
 		quoteForm.classList.add('is-leaving');
 		setTimeout(function () {
 			quoteForm.hidden = true;
 			quoteSuccess.hidden = false;
 			quoteSuccess.offsetHeight; // force reflow so the transition below actually animates
+			quoteSwap.style.height = quoteSuccess.offsetHeight + 'px';
 			requestAnimationFrame(function () {
 				quoteSuccess.classList.add('is-visible');
 			});
+			setTimeout(function () {
+				quoteSwap.classList.remove('is-resizing');
+				quoteSwap.style.height = 'auto';
+			}, RESIZE_DURATION);
 		}, FADE_DURATION);
 	}
 
