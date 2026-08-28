@@ -558,6 +558,26 @@ nav.main-nav a:hover { color: var(--green-dark); }
 	background: #fff;
 }
 
+.form-actions {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+.btn-debug {
+	font: inherit;
+	font-size: 0.85rem;
+	padding: 8px 14px;
+	border: 1px dashed var(--line);
+	border-radius: 8px;
+	background: transparent;
+	color: var(--ink-soft);
+	cursor: pointer;
+}
+.btn-debug:hover { border-color: var(--green); color: var(--green-dark); }
+.btn-debug[hidden] { display: none; }
+.btn-debug[disabled] { opacity: 0.6; cursor: default; }
+
 .quote-form[hidden] { display: none; }
 .quote-form {
 	opacity: 1;

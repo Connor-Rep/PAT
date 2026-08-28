@@ -91,10 +91,13 @@
 				<label>Tell us a bit about the job
 					<textarea name="message" rows="4" placeholder="What needs testing, where you're based, and when you'd like it done"></textarea>
 				</label>
-				<button class="btn" type="submit">
-					<span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
-					Send Enquiry
-				</button>
+				<div class="form-actions">
+					<button class="btn" type="submit">
+						<span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+						Send Enquiry
+					</button>
+					<button class="btn-debug" type="button" id="debugSubmit" hidden>Test (won't send)</button>
+				</div>
 				<p class="form-note" id="formStatus">By submitting this form, you agree that we may use your details to contact you regarding your enquiry. See our <a href="../privacy-policy/">Privacy Policy</a> for details on how we handle your data.</p>
 			</form>
 
@@ -193,6 +196,21 @@
 			formStatus.innerHTML = "Sorry, something went wrong sending that. Please call or email us instead &mdash; details on the right.";
 			submitBtn.disabled = false;
 		});
+	});
+
+	// Add ?debug to the URL to show a button that runs the send/success animation
+	// without actually posting to Formspree, so the flow can be tested for free.
+	var debugBtn = document.getElementById('debugSubmit');
+	if (window.location.search.indexOf('debug') !== -1) {
+		debugBtn.hidden = false;
+	}
+	debugBtn.addEventListener('click', function () {
+		debugBtn.disabled = true;
+		formStatus.textContent = 'Sending... (debug: not actually sent)';
+		setTimeout(function () {
+			showSuccess();
+			debugBtn.disabled = false;
+		}, MIN_SEND_DELAY);
 	});
 </script>
 
