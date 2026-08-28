@@ -47,8 +47,9 @@
 </footer>
 
 <script>
-	// Fade the page out before following an internal link to another page,
-	// so navigating the site doesn't feel like an abrupt jump cut.
+	// Hold briefly before following an internal link to another page (no
+	// visual animation, just a deliberate pause) so navigating the site
+	// doesn't feel instantaneous.
 	document.addEventListener('click', function (e) {
 		if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
 		var link = e.target.closest('a');
@@ -58,7 +59,6 @@
 		if (url.origin !== window.location.origin) return;
 		if (url.pathname === window.location.pathname && url.hash) return;
 		e.preventDefault();
-		document.body.classList.add('page-fade-out');
 		setTimeout(function () { window.location.href = link.href; }, 200);
 	});
 

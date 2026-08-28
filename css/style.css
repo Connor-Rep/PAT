@@ -45,19 +45,6 @@ body {
 	background: var(--paper);
 	line-height: 1.6;
 	-webkit-font-smoothing: antialiased;
-	animation: page-fade-in 0.25s ease;
-}
-@keyframes page-fade-in {
-	from { opacity: 0; }
-	to { opacity: 1; }
-}
-body.page-fade-out {
-	opacity: 0;
-	transition: opacity 0.2s ease;
-}
-@media (prefers-reduced-motion: reduce) {
-	body { animation: none; }
-	body.page-fade-out { transition: none; opacity: 1; }
 }
 
 img { max-width: 100%; display: block; }
@@ -610,6 +597,7 @@ nav.main-nav a:hover { color: var(--green-dark); }
 .quote-success {
 	opacity: 0;
 	transform: translateY(10px);
+	scroll-margin-top: 100px;
 }
 .quote-success.is-visible {
 	opacity: 1;
