@@ -22,6 +22,8 @@ a, button, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 :focus { outline: none; }
 :focus-visible { outline: 2px solid var(--green-dark); outline-offset: 2px; }
 
+::selection { background: var(--green); color: #fff; }
+
 :root {
 	--green: #4c8c5a;
 	--green-dark: #386943;

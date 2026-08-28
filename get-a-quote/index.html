@@ -9,31 +9,31 @@
 <!-- TODO: every "https://connor-rep.github.io/PAT/" URL on this page (canonical,
      og:image, og:url, robots.txt, sitemap.xml) needs swapping for the real
      domain once the site moves to its own repo. -->
-<link rel="canonical" href="https://connor-rep.github.io/PAT/get-a-quote.html">
+<link rel="canonical" href="https://connor-rep.github.io/PAT/get-a-quote/">
 
 <!-- Open Graph / social share preview. -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Get a Quote | Safetay Electrical Testing">
 <meta property="og:description" content="Get a fast, no-obligation PAT testing quote covering Tayside and surrounding areas.">
-<meta property="og:image" content="https://connor-rep.github.io/PAT/images/social-share.png">
-<meta property="og:url" content="https://connor-rep.github.io/PAT/get-a-quote.html">
+<meta property="og:image" content="https://connor-rep.github.io/PAT/images/social-share.jpg">
+<meta property="og:url" content="https://connor-rep.github.io/PAT/get-a-quote/">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
 <header class="site-header">
 	<div class="wrap header-row">
 		<a class="brand" href="./">
-			<img src="images/logo.png" alt="Safetay Electrical Testing logo">
+			<img src="../images/logo.png" alt="Safetay Electrical Testing logo">
 		</a>
 
 		<nav class="main-nav" id="main-nav">
 			<a href="./#services">Services</a>
 			<a href="./#regulations">Regulations &amp; Info</a>
 			<a href="./#reviews">Reviews</a>
-			<a href="get-a-quote.html">Get a Quote</a>
+			<a href="../get-a-quote/">Get a Quote</a>
 		</nav>
 
 		<div class="header-cta">
@@ -62,7 +62,8 @@
 	<!-- QUOTE FORM -->
 	<section class="alt">
 		<div class="wrap quote-layout">
-			<form class="quote-form" id="quoteForm">
+			<form class="quote-form" id="quoteForm" action="https://formspree.io/f/maeyyaga" method="POST">
+				<input type="hidden" name="_subject" value="PAT testing quote request">
 				<div class="form-row">
 					<label>Your name
 						<input type="text" name="name" required>
@@ -94,8 +95,7 @@
 					<span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
 					Send Enquiry
 				</button>
-				<p class="form-note">This opens your email app with your details filled in, ready to send to us.</p>
-				<p class="form-note">By submitting this form, you agree that we may use your details to contact you regarding your enquiry. See our <a href="privacy-policy.html">Privacy Policy</a> for details on how we handle your data.</p>
+				<p class="form-note" id="formStatus">By submitting this form, you agree that we may use your details to contact you regarding your enquiry. See our <a href="../privacy-policy/">Privacy Policy</a> for details on how we handle your data.</p>
 			</form>
 
 			<aside class="quote-aside">
@@ -123,7 +123,7 @@
 <footer>
 	<div class="wrap">
 		<span>&copy; <span id="year"></span> Safetay Electrical Testing</span>
-		<span><a href="tel:+447775435872">07775 435 872</a> &middot; <a href="mailto:info@safetaypat.co.uk">info@safetaypat.co.uk</a> &middot; <a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="terms-and-conditions.html">Terms &amp; Conditions</a></span>
+		<span><a href="tel:+447775435872">07775 435 872</a> &middot; <a href="mailto:info@safetaypat.co.uk">info@safetaypat.co.uk</a> &middot; <a href="../privacy-policy/">Privacy Policy</a> &middot; <a href="../terms-and-conditions/">Terms &amp; Conditions</a></span>
 	</div>
 </footer>
 
@@ -142,34 +142,31 @@
 		});
 	});
 
-	// No backend to post to, so we build a pre-filled email instead.
-	document.getElementById('quoteForm').addEventListener('submit', function (e) {
+	var quoteForm = document.getElementById('quoteForm');
+	var formStatus = document.getElementById('formStatus');
+
+	quoteForm.addEventListener('submit', function (e) {
 		e.preventDefault();
-		var f = e.target;
-		var name = f.name.value.trim();
-		var phone = f.phone.value.trim();
-		var email = f.email.value.trim();
-		var business = f.business.value.trim();
-		var appliances = f.appliances.value;
-		var message = f.message.value.trim();
+		var submitBtn = quoteForm.querySelector('button[type="submit"]');
+		submitBtn.disabled = true;
+		formStatus.textContent = 'Sending...';
 
-		var subject = 'PAT testing quote request from ' + name;
-		var bodyLines = [
-			'Name: ' + name,
-			'Phone: ' + phone,
-			'Email: ' + email,
-			'Business/property: ' + (business || 'n/a'),
-			'Roughly how many appliances: ' + appliances,
-			'',
-			'Details:',
-			message
-		];
-
-		var mailto = 'mailto:info@safetaypat.co.uk'
-			+ '?subject=' + encodeURIComponent(subject)
-			+ '&body=' + encodeURIComponent(bodyLines.join('\n'));
-
-		window.location.href = mailto;
+		fetch(quoteForm.action, {
+			method: 'POST',
+			body: new FormData(quoteForm),
+			headers: { 'Accept': 'application/json' }
+		}).then(function (response) {
+			if (response.ok) {
+				quoteForm.reset();
+				formStatus.textContent = "Thanks, we've got your enquiry and will be in touch soon.";
+			} else {
+				formStatus.innerHTML = "Sorry, something went wrong sending that. Please call or email us instead &mdash; details on the right.";
+			}
+		}).catch(function () {
+			formStatus.innerHTML = "Sorry, something went wrong sending that. Please call or email us instead &mdash; details on the right.";
+		}).finally(function () {
+			submitBtn.disabled = false;
+		});
 	});
 </script>
 
