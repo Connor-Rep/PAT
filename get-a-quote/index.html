@@ -154,6 +154,19 @@
 	var quoteSuccess = document.getElementById('quoteSuccess');
 	var formStatus = document.getElementById('formStatus');
 	var MIN_SEND_DELAY = 700; // keep the "Sending..." state visible for a moment, even on a fast connection
+	var FADE_DURATION = 250; // matches the CSS transition on .quote-form / .quote-success
+
+	function showSuccess() {
+		quoteForm.classList.add('is-leaving');
+		setTimeout(function () {
+			quoteForm.hidden = true;
+			quoteSuccess.hidden = false;
+			quoteSuccess.offsetHeight; // force reflow so the transition below actually animates
+			requestAnimationFrame(function () {
+				quoteSuccess.classList.add('is-visible');
+			});
+		}, FADE_DURATION);
+	}
 
 	quoteForm.addEventListener('submit', function (e) {
 		e.preventDefault();
@@ -171,8 +184,7 @@
 		Promise.all([sending, minDelay]).then(function (results) {
 			var response = results[0];
 			if (response.ok) {
-				quoteForm.hidden = true;
-				quoteSuccess.hidden = false;
+				showSuccess();
 			} else {
 				formStatus.innerHTML = "Sorry, something went wrong sending that. Please call or email us instead &mdash; details on the right.";
 				submitBtn.disabled = false;
