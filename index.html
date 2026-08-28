@@ -30,7 +30,7 @@
 	"@context": "https://schema.org",
 	"@type": "Electrician",
 	"name": "Safetay Electrical Testing",
-	"image": "images/logo.png",
+	"image": "https://connor-rep.github.io/PAT/images/logo.png",
 	"url": "https://connor-rep.github.io/PAT/",
 	"telephone": "+447775435872",
 	"email": "info@safetaypat.co.uk",
@@ -123,14 +123,14 @@
 <header class="site-header">
 	<div class="wrap header-row">
 		<a class="brand" href="#top">
-			<img src="images/logo.png" alt="Safetay Electrical Testing logo">
+			<img src="images/logo.png" alt="Safetay Electrical Testing logo" width="524" height="79">
 		</a>
 
 		<nav class="main-nav" id="main-nav">
 			<a href="#services">Services</a>
 			<a href="#regulations">Regulations &amp; Info</a>
 			<a href="#reviews">Reviews</a>
-			<a href="get-a-quote/">Get In Touch</a>
+			<a href="get-a-quote/">Get a Quote</a>
 		</nav>
 
 		<div class="header-cta">
@@ -151,7 +151,7 @@
 	<section class="hero">
 		<div class="wrap">
 			<div>
-				<img class="cert-mini" src="images/certified.png" alt="Certified PAT Tester">
+				<img class="cert-mini" src="images/certified.png" alt="Certified PAT Tester" width="150" height="102">
 				<h1>PAT / EET Testing Across Tayside &amp; Surrounding Areas</h1>
 				<p class="lede">Safetay Electrical Testing keeps your workplace safe and compliant with fast, thorough Portable Appliance Testing (PAT), also known as Electrical Equipment Testing (EET). We're available 24 hours a day, 7 days a week, at a time that suits your business.</p>
 				<div class="hero-actions">
@@ -309,9 +309,9 @@
 		<div class="wrap">
 			<h2 style="text-align:center;">Certifications you can trust</h2>
 			<div class="cert-strip">
-				<img src="images/certified.png" alt="Certified PAT Tester">
-				<img src="images/cityandguilds.png" alt="City &amp; Guilds">
-				<img class="cert-disclosure" src="images/disclosurescotland.png" alt="Disclosure Scotland">
+				<img src="images/certified.png" alt="Certified PAT Tester" width="150" height="102">
+				<img src="images/cityandguilds.png" alt="City &amp; Guilds" width="320" height="320">
+				<img class="cert-disclosure" src="images/disclosurescotland.png" alt="Disclosure Scotland" width="632" height="395">
 			</div>
 		</div>
 	</section>
@@ -323,7 +323,14 @@
 			<h2>What our customers say</h2>
 			<p class="lede">Real feedback from businesses and organisations we've tested across Dundee, Perth and Kinross, Edinburgh, Glasgow and beyond.</p>
 
-			<div class="reviews-grid">
+			<div class="reviews-carousel">
+			<button class="reviews-arrow reviews-arrow-prev" type="button" aria-label="Previous reviews">
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+			</button>
+			<button class="reviews-arrow reviews-arrow-next" type="button" aria-label="Next reviews">
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+			</button>
+			<div class="reviews-grid" id="reviewsGrid">
 				<div class="review-card">
 					<div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
 					<p class="quote">&ldquo;Thanks for undertaking our PAT testing this morning so efficiently. We recommend your services to all local businesses.&rdquo;</p>
@@ -374,6 +381,7 @@
 					<p class="quote">&ldquo;We are a large GP practice based in Fife. Safetay completed our PAT testing for this year and I can highly recommend them &mdash; professional, friendly and very happy with the service provided.&rdquo;</p>
 					<div class="who"><strong>D. Ramsay</strong>Practice Manager</div>
 				</div>
+			</div>
 			</div>
 		</div>
 	</section>
@@ -483,6 +491,37 @@
 		} else {
 			nums.forEach(animate);
 		}
+	})();
+
+	// Reviews carousel: prev/next arrows scroll by one card width, and
+	// disable themselves at either end.
+	(function () {
+		var grid = document.getElementById('reviewsGrid');
+		var prevBtn = document.querySelector('.reviews-arrow-prev');
+		var nextBtn = document.querySelector('.reviews-arrow-next');
+		if (!grid || !prevBtn || !nextBtn) return;
+
+		function step() {
+			var card = grid.querySelector('.review-card');
+			var gap = parseFloat(getComputedStyle(grid).columnGap || getComputedStyle(grid).gap || 0);
+			return card ? card.getBoundingClientRect().width + gap : grid.clientWidth;
+		}
+
+		function updateArrows() {
+			var maxScroll = grid.scrollWidth - grid.clientWidth - 1;
+			prevBtn.disabled = grid.scrollLeft <= 0;
+			nextBtn.disabled = grid.scrollLeft >= maxScroll;
+		}
+
+		prevBtn.addEventListener('click', function () {
+			grid.scrollBy({ left: -step(), behavior: 'smooth' });
+		});
+		nextBtn.addEventListener('click', function () {
+			grid.scrollBy({ left: step(), behavior: 'smooth' });
+		});
+		grid.addEventListener('scroll', updateArrows);
+		window.addEventListener('resize', updateArrows);
+		updateArrows();
 	})();
 </script>
 

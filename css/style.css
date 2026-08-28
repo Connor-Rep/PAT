@@ -205,8 +205,11 @@ nav.main-nav a:hover { color: var(--green-dark); }
 	background: var(--ink);
 	margin: 5px 0;
 	border-radius: 2px;
-	transition: 0.2s;
+	transition: transform 0.2s ease, opacity 0.2s ease;
 }
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 /* ------------------------------------------------------------------ */
 /* Hero                                                                 */
@@ -330,17 +333,42 @@ nav.main-nav a:hover { color: var(--green-dark); }
 /* ------------------------------------------------------------------ */
 /* Reviews                                                             */
 /* ------------------------------------------------------------------ */
+.reviews-carousel {
+	position: relative;
+	margin-top: 40px;
+}
 .reviews-grid {
 	display: flex;
 	overflow-x: auto;
 	scroll-snap-type: x mandatory;
 	gap: 22px;
-	margin-top: 40px;
 	padding-bottom: 12px;
 	-webkit-overflow-scrolling: touch;
 	scrollbar-width: none;
 }
 .reviews-grid::-webkit-scrollbar { display: none; }
+.reviews-arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 5;
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: #fff;
+	border: 1px solid var(--line);
+	box-shadow: var(--shadow);
+	color: var(--green-dark);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+.reviews-arrow:hover { background: var(--green); border-color: var(--green); color: #fff; }
+.reviews-arrow:focus-visible { outline: 2px solid var(--green-dark); outline-offset: 2px; }
+.reviews-arrow:disabled { opacity: 0.35; cursor: default; pointer-events: none; }
+.reviews-arrow-prev { left: -22px; }
+.reviews-arrow-next { right: -22px; }
 .review-card {
 	flex: 0 0 calc((100% - 44px) / 3);
 	scroll-snap-align: start;
@@ -766,4 +794,5 @@ footer a:hover { color: #fff; }
 		flex: 0 0 82%;
 		scroll-snap-align: start;
 	}
+	.reviews-arrow { display: none; }
 }
