@@ -579,6 +579,7 @@ nav.main-nav a:hover { color: var(--green-dark); }
 }
 .quote-success h3 { margin: 0; }
 .quote-success p { margin: 0; color: var(--ink-soft); }
+.detail-loc-below { display: none; }
 .quote-form textarea { resize: vertical; }
 .quote-form .btn {
 	align-self: flex-start;
@@ -695,6 +696,8 @@ footer a:hover { color: #fff; }
 	.split { grid-template-columns: 1fr; gap: 28px; }
 	.contact-grid { grid-template-columns: 1fr 1fr; }
 	.quote-layout { grid-template-columns: 1fr; }
+	.detail-loc-side { display: none; }
+	.detail-loc-below { display: inline; }
 }
 
 @media (max-width: 720px) {
