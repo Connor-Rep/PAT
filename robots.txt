@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://connor-rep.github.io/PAT/sitemap.xml
+Sitemap: https://safetaypattesting.co.uk/sitemap.xml
