@@ -226,9 +226,9 @@ nav.main-nav a:hover { color: var(--green-dark); }
 	position: absolute;
 	inset: 0;
 	pointer-events: none;
-	background: url('../images/dundee.jpg') center/cover no-repeat;
-	opacity: 0.18;
-	mix-blend-mode: luminosity;
+	background-image: radial-gradient(circle, rgba(255,255,255,0.4) 1.5px, transparent 1.5px);
+	background-size: 24px 24px;
+	opacity: 0.3;
 }
 .hero .wrap { position: relative; max-width: 760px; }
 .hero h1 {
