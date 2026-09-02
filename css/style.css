@@ -221,6 +221,15 @@ nav.main-nav a:hover { color: var(--green-dark); }
 	overflow: hidden;
 	padding: 90px 0 100px;
 }
+.hero::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: url('../images/hero-pattern.png') repeat;
+	background-size: 110px 110px;
+	opacity: 0.1;
+}
 .hero .wrap { position: relative; max-width: 760px; }
 .hero h1 {
 	font-size: clamp(2rem, 4.2vw, 3.1rem);
