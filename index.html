@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PAT / EET Testing Across Tayside &amp; Surrounding Areas | Safetay Electrical Testing</title>
-<meta name="description" content="City &amp; Guilds qualified PAT (EET/ITEE) testing across Dundee, Perth &amp; Kinross, Fife, Angus, Edinburgh and Glasgow. Available 24/7.">
+<meta name="description" content="Fully qualified PAT (EET/ITEE) testing across Dundee, Perth &amp; Kinross, Fife, Angus, Edinburgh and Glasgow. Available 24/7.">
 
 <link rel="canonical" href="https://safetaypattesting.co.uk/">
 
 <!-- Open Graph / social share preview. -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Safetay Electrical Testing | PAT Testing Tayside">
-<meta property="og:description" content="City &amp; Guilds qualified PAT testing across Tayside and surrounding areas, available 24/7.">
+<meta property="og:description" content="Fully qualified PAT testing across Tayside and surrounding areas, available 24/7.">
 <meta property="og:image" content="https://safetaypattesting.co.uk/images/social-share.jpg">
 <meta property="og:url" content="https://safetaypattesting.co.uk/">
 <meta name="twitter:card" content="summary_large_image">
@@ -169,7 +169,7 @@
 		<div class="stats">
 			<div class="stat-card"><span class="num" data-target="15" data-suffix="">0</span><span class="label">Years in business</span></div>
 			<div class="stat-card"><span class="num" data-target="5" data-suffix="&#9733;">0&#9733;</span><span class="label">Average customer rating</span></div>
-			<div class="stat-card"><span class="num" data-target="10000" data-suffix="+">0+</span><span class="label">Appliances tested</span></div>
+			<div class="stat-card"><span class="num" data-target="500000" data-suffix="+" data-duration="1400">0+</span><span class="label">Appliances tested</span></div>
 			<div class="stat-card"><span class="num" data-target="1" data-suffix=" day">0 day</span><span class="label">Average quote turnaround</span></div>
 		</div>
 	</div>
@@ -307,7 +307,6 @@
 			<h2 style="text-align:center;">Certifications you can trust</h2>
 			<div class="cert-strip">
 				<img src="images/certified.png" alt="Certified PAT Tester" width="150" height="102">
-				<img src="images/cityandguilds.png" alt="City &amp; Guilds" width="320" height="320">
 				<img class="cert-disclosure" src="images/disclosurescotland.png" alt="Disclosure Scotland" width="632" height="395">
 			</div>
 		</div>
@@ -472,7 +471,7 @@
 		function animate(el) {
 			var target = parseInt(el.getAttribute('data-target'), 10);
 			var suffix = el.getAttribute('data-suffix') || '';
-			var duration = 2400;
+			var duration = parseInt(el.getAttribute('data-duration'), 10) || 2400;
 			var start = null;
 
 			function step(timestamp) {
