@@ -1,6 +1,4 @@
-# TODO: update the Sitemap URL below to the real domain once the site
-# moves off https://connor-rep.github.io/PAT/ to its own repo.
 User-agent: *
 Allow: /
 
-Sitemap: https://connor-rep.github.io/PAT/sitemap.xml
+Sitemap: https://safetaypattesting.co.uk/sitemap.xml
